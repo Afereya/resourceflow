@@ -1,7 +1,7 @@
-export default function HomePage() {
+export default function PlanningPage() {
   return (
     <main>
-      <h1>ResourceFlow</h1>
+      <h1>Planning</h1>
       <p>Resource planning and team capacity management.</p>
     </main>
   );

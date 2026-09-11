@@ -1,7 +1,7 @@
-export default function HomePage() {
+export default function EmployeesPage() {
   return (
     <main>
-      <h1>ResourceFlow</h1>
+      <h1>Employees</h1>
       <p>Resource planning and team capacity management.</p>
     </main>
   );
