@@ -1,0 +1,10 @@
+node_modules/
+**/.next/
+*.log
+
+.env
+.env.*
+!.env.example
+
+output.txt
+ResourceFlow_Return_to_Development_Plan_RU.docx
