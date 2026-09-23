@@ -4,7 +4,7 @@ type EmployeeCardProps = {
   employee: Employee;
 };
 
-function getStatusLabel(status: EmployeeStatus): string {
+export function getStatusLabel(status: EmployeeStatus): string {
   switch (status) {
     case "available":
       return "Available";
