@@ -1,14 +1,13 @@
 "use client";
-
-import { SubmitEvent, useState } from "react";
+import { type SubmitEvent, useState } from "react";
 
 type LoginFormErrors = {
   email?: string;
   password?: string;
-}
+};
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");;
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<LoginFormErrors>({});
 
@@ -17,8 +16,9 @@ export default function LoginPage() {
   
     const nextErrors: LoginFormErrors = {};
     const normalizedEmail = email.trim();
-
-    if(!normalizedEmail) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!normalizedEmail) {
       nextErrors.email =  "Email is required";
     } else if (!normalizedEmail.includes("@")) {
       nextErrors.email = "Please enter a valid email address";
@@ -28,6 +28,8 @@ export default function LoginPage() {
       nextErrors.password = "Password is required";
     } else if (password.length < 8) {
       nextErrors.password = "Password must be at least 8 characters long";
+    }else if (!emailPattern.test(normalizedEmail)) {
+      nextErrors.email = "Please enter a valid email address";
     }
 
     setErrors(nextErrors);
@@ -44,7 +46,7 @@ export default function LoginPage() {
         <p className="mt-2 text-sm text-slate-600">
           Manage team capacity and project allocation.
         </p>
-        <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+        <form className="mt-6 space-y-4" onSubmit={handleSubmit} noValidate>
           <div>
             <label htmlFor="email">Email</label>
             <input className="mt-2 w-full rounded-md border border-slate-300 px-3 py-2"
@@ -53,8 +55,15 @@ export default function LoginPage() {
               type="email"
               autoComplete="email"
               value={email}
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={errors.email ? "email-error" : undefined}
               onChange={(e) => setEmail(e.target.value)} 
             />
+            {errors.email && (
+              <p id="email-error" className="mt-1 text-sm text-red-600">
+                {errors.email}
+              </p>
+            )}
           </div>
 
           <div>
@@ -65,8 +74,15 @@ export default function LoginPage() {
               type="password"
               autoComplete="current-password"
               value={password}
+              aria-invalid={Boolean(errors.password)}
+              aria-describedby={errors.password ? "password-error" : undefined}
               onChange={(e) => setPassword(e.target.value)} 
             />
+            {errors.password && (
+              <p id="password-error" className="mt-1 text-sm text-red-600">
+                {errors.password}
+              </p>
+            )}
           </div>
           <button type="submit" className="w-full rounded-md bg-slate-900 px-4 py-2 text-white">Sign in</button>
         </form>
