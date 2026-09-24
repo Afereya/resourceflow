@@ -6,20 +6,20 @@ export const employees: Employee[] = [
     name: "John Doe",
     role: "Software Engineer",
     status: "available",
-    allocationPercentage: 0
-  }, 
+    allocationPercentage: 0,
+  },
   {
     id: 2,
     name: "Jane Smith",
     role: "Product Manager",
     status: "partially-allocated",
-    allocationPercentage: 50
-  }, 
+    allocationPercentage: 50,
+  },
   {
     id: 3,
     name: "Bob Johnson",
     role: "Designer",
     status: "fully-allocated",
-    allocationPercentage: 100
-  }, 
+    allocationPercentage: 100,
+  },
 ];

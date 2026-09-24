@@ -8,7 +8,6 @@ export default function EmployeesPage() {
       <h1>Employees</h1>
       <p>Resource planning and team capacity management.</p>
       <EmployeeList employees={employees} />
-
     </main>
   );
 }
