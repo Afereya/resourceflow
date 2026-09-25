@@ -10,7 +10,11 @@
     "build:web": "npm run build --workspace=web",
     "lint:web": "npm run lint --workspace=web",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "dev:api": "npm run start:dev --workspace=api",
+    "build:api": "npm run build --workspace=api",
+    "lint:api": "npm run lint --workspace=api",
+    "test:api": "npm run test --workspace=api"
   },
   "engines": {
     "node": ">=24 <25"
