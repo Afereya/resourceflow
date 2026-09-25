@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { EmployeeCard, getStatusLabel } from "@/components/employee-card";
 import type { Employee, EmployeeStatus } from "@/types/employee";
@@ -33,6 +33,14 @@ export function EmployeeList({ employees }: EmployeeListProps) {
     return matchesStatus && matchesSearch;
   });
 
+  const employeeCount = filteredEmployees.length;
+  useEffect(() => {
+    document.title = `${employeeCount} employees | ResourceFlow`;
+    return () => {
+      document.title = "ResourceFlow";
+    };
+  }, [employeeCount]);
+
   return (
     <div>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
@@ -40,7 +48,6 @@ export function EmployeeList({ employees }: EmployeeListProps) {
           <label htmlFor="employee-search" className="text-sm font-medium">
             Search employees
           </label>
-
           <input
             id="employee-search"
             type="search"
