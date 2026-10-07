@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EmployeesController } from './employees.controller.js';
 import { EmployeesService } from './employees.service.js';
+import { NotFoundException } from '@nestjs/common';
 
 describe('EmployeesController', () => {
   let controller: EmployeesController;

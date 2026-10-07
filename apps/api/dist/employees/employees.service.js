@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 let EmployeesService = class EmployeesService {
     employees = [
         {
@@ -29,8 +29,25 @@ let EmployeesService = class EmployeesService {
             allocationPercentage: 100,
         },
     ];
+    nextEmployeeId = Math.max(0, ...this.employees.map((employee) => employee.id)) + 1;
+    create(createEmployeeDto) {
+        const employee = {
+            ...createEmployeeDto,
+            id: this.nextEmployeeId,
+        };
+        this.nextEmployeeId += 1;
+        this.employees.push(employee);
+        return employee;
+    }
     findAll() {
         return this.employees;
+    }
+    findOne(id) {
+        const employee = this.employees.find((employee) => employee.id === id);
+        if (!employee) {
+            throw new NotFoundException(`Employee with id ${id} not found`);
+        }
+        return employee;
     }
 };
 EmployeesService = __decorate([

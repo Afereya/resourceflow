@@ -7,8 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Controller, Get } from '@nestjs/common';
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+import { Controller, Get, Param, ParseIntPipe, Post, Body, } from '@nestjs/common';
 import { EmployeesService } from './employees.service.js';
+import { CreateEmployeeDto } from './dto/create-employee.dto.js';
 let EmployeesController = class EmployeesController {
     employeesService;
     constructor(employeesService) {
@@ -17,6 +21,12 @@ let EmployeesController = class EmployeesController {
     findAll() {
         return this.employeesService.findAll();
     }
+    findOne(id) {
+        return this.employeesService.findOne(id);
+    }
+    create(createEmployeeDto) {
+        return this.employeesService.create(createEmployeeDto);
+    }
 };
 __decorate([
     Get(),
@@ -24,6 +34,20 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Array)
 ], EmployeesController.prototype, "findAll", null);
+__decorate([
+    Get(':id'),
+    __param(0, Param('id', ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Object)
+], EmployeesController.prototype, "findOne", null);
+__decorate([
+    Post(),
+    __param(0, Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [CreateEmployeeDto]),
+    __metadata("design:returntype", Object)
+], EmployeesController.prototype, "create", null);
 EmployeesController = __decorate([
     Controller('employees'),
     __metadata("design:paramtypes", [EmployeesService])
