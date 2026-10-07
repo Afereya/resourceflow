@@ -1,6 +1,7 @@
 import type { Employee } from './employee.js';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import type { CreateEmployeeDto } from './dto/create-employee.dto.js';
+import type { UpdateEmployeeDto } from './dto/update-employee.dto.js';
 @Injectable()
 export class EmployeesService {
   private readonly employees: Employee[] = [
@@ -32,12 +33,30 @@ export class EmployeesService {
 
   create(createEmployeeDto: CreateEmployeeDto): Employee {
     const employee: Employee = {
-      ...createEmployeeDto,
       id: this.nextEmployeeId,
+      name: createEmployeeDto.name,
+      role: createEmployeeDto.role,
+      status: createEmployeeDto.status,
+      allocationPercentage: createEmployeeDto.allocationPercentage,
     };
 
     this.nextEmployeeId += 1;
     this.employees.push(employee);
+
+    return employee;
+  }
+
+  update(id: number, updateEmployeeDto: UpdateEmployeeDto): Employee {
+    const employee = this.findOne(id);
+    Object.assign(employee, updateEmployeeDto);
+
+    return employee;
+  }
+
+  remove(id: number): Employee {
+    const employee = this.findOne(id);
+    const employeeIndex = this.employees.indexOf(employee);
+    this.employees.splice(employeeIndex, 1);
 
     return employee;
   }
