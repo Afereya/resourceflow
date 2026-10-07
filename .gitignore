@@ -2,6 +2,9 @@ node_modules/
 **/.next/
 *.log
 
+apps/api/dist/
+*.tsbuildinfo
+git rm -r --cached apps/api/dist
 .env
 .env.*
 !.env.example
