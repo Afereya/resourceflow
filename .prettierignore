@@ -6,3 +6,8 @@ node_modules
 *.docx
 output.txt
 AGENTS.md
+
+# Third-party assistant skills installed by the Prisma initializer.
+apps/api/.agents/
+apps/api/.claude/
+apps/api/.windsurf/
